@@ -1,0 +1,7 @@
+F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\InternetExplorerExtension\bin\Debug\InternetExplorerExtension.dll
+F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\InternetExplorerExtension\bin\Debug\InternetExplorerExtension.pdb
+F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\InternetExplorerExtension\obj\Debug\InternetExplorerExtension.HighlighterOptionsForm.resources
+F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\InternetExplorerExtension\obj\Debug\InternetExplorerExtension.csproj.GenerateResource.Cache
+F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\InternetExplorerExtension\obj\Debug\InternetExplorerExtension.dll
+F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\InternetExplorerExtension\obj\Debug\InternetExplorerExtension.pdb
+F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\InternetExplorerExtension\obj\Debug\InternetExplorerExtension.csprojResolveAssemblyReference.cache
