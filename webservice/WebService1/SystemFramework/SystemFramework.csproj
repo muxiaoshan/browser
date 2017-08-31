@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{3667D604-CE5F-4DEA-9B41-9D7EA1EF2860}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <AssemblyName>SystemFramework</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="FarPoint.Win.Spread" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.VisualBasic" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="dhcc.epr.systemframework\AppException.cs" />
+    <Compile Include="dhcc.epr.systemframework\BorderSite.cs" />
+    <Compile Include="dhcc.epr.systemframework\CellPrintFormat.cs" />
+    <Compile Include="dhcc.epr.systemframework\Configuration.cs" />
+    <Compile Include="dhcc.epr.systemframework\Constant.cs" />
+    <Compile Include="dhcc.epr.systemframework\CrossCellType.cs" />
+    <Compile Include="dhcc.epr.systemframework\CustomTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dhcc.epr.systemframework\EPRCategoryType.cs" />
+    <Compile Include="dhcc.epr.systemframework\EPRDateTimePicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dhcc.epr.systemframework\EPRGlossaryType.cs" />
+    <Compile Include="dhcc.epr.systemframework\EPRTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dhcc.epr.systemframework\EventLogHelper.cs" />
+    <Compile Include="dhcc.epr.systemframework\FormType.cs" />
+    <Compile Include="dhcc.epr.systemframework\GlobalValues.cs" />
+    <Compile Include="dhcc.epr.systemframework\HAlignment.cs" />
+    <Compile Include="dhcc.epr.systemframework\ICoordinate.cs" />
+    <Compile Include="dhcc.epr.systemframework\ImageLibType.cs" />
+    <Compile Include="dhcc.epr.systemframework\Impersonator.cs" />
+    <Compile Include="dhcc.epr.systemframework\Linenum.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dhcc.epr.systemframework\ListViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dhcc.epr.systemframework\MessageManager.cs" />
+    <Compile Include="dhcc.epr.systemframework\MetaDataType.cs" />
+    <Compile Include="dhcc.epr.systemframework\MyRichTextCellType.cs" />
+    <Compile Include="dhcc.epr.systemframework\NativeMethods.cs" />
+    <Compile Include="dhcc.epr.systemframework\PanelEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dhcc.epr.systemframework\PrintMultiplePagesOption.cs" />
+    <Compile Include="dhcc.epr.systemframework\PrintRowType.cs" />
+    <Compile Include="dhcc.epr.systemframework\PrintStatus.cs" />
+    <Compile Include="dhcc.epr.systemframework\PrintTemplateFormat.cs" />
+    <Compile Include="dhcc.epr.systemframework\RangeType.cs" />
+    <Compile Include="dhcc.epr.systemframework\RichTextBoxEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dhcc.epr.systemframework\SCROLLINFO.cs" />
+    <Compile Include="dhcc.epr.systemframework\ScrollInfoMask.cs" />
+    <Compile Include="dhcc.epr.systemframework\SimpleDataType.cs" />
+    <Compile Include="dhcc.epr.systemframework\TemplateType.cs" />
+    <Compile Include="dhcc.epr.systemframework\VAlignment.cs" />
+    <Compile Include="dhcc.epr.systemframework\VersionState.cs" />
+    <Compile Include="dhcc.epr.systemframework\XmlCompressor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="dhcc.epr.systemframework\CustomTreeView.resources" />
+    <EmbeddedResource Include="dhcc.epr.systemframework\EPRDateTimePicker.resources" />
+    <EmbeddedResource Include="dhcc.epr.systemframework\EPRTreeView.resources" />
+    <EmbeddedResource Include="dhcc.epr.systemframework\RichTextBoxEx.resources" />
+    <EmbeddedResource Include="SystemFramework.dll.licenses" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

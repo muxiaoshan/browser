@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema attributeFormDefault="qualified" elementFormDefault="qualified" id="EInsGroupNewDataSet" targetNamespace="http://www.dhcc.com.cn/epr/metaservice/SELECTGroupListNew" xmlns="http://www.dhcc.com.cn/epr/metaservice/SELECTGroupListNew" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:mstns="http://www.dhcc.com.cn/epr/metaservice/SELECTGroupListNew" xmlns:s="http://www.w3.org/2001/XMLSchema">
+  <s:element msdata:IsDataSet="true" name="EInsGroupNewDataSet">
+    <s:complexType>
+      <s:choice maxOccurs="unbounded">
+        <s:element name="SELECTGroupListNew">
+          <s:complexType>
+            <s:sequence>
+              <s:element minOccurs="0" name="ID" type="s:string"/>
+              <s:element minOccurs="0" name="GroupItemName" type="s:string"/>
+              <s:element minOccurs="0" name="GroupItemID" type="s:string"/>
+              <s:element minOccurs="0" name="ItemStatus" type="s:string"/>
+            </s:sequence>
+          </s:complexType>
+        </s:element>
+      </s:choice>
+    </s:complexType>
+  </s:element>
+</s:schema>
+  </wsdl:types>
+</wsdl:definitions>

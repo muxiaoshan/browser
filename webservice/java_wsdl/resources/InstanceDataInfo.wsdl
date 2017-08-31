@@ -1,0 +1,1358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="http://www.dhcc.com.cn/epr/metaservice" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s0="http://www.dhcc.com.cn/epr/metaservice" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <import namespace="http://www.dhcc.com.cn/epr/metaservice/SELECTGroupListNew" location="wsdl0.wsdl">
+    </import>
+  <types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.dhcc.com.cn/epr/metaservice">
+<s:import namespace="http://www.dhcc.com.cn/epr/metaservice/SELECTGroupListNew"/>
+<s:element name="AddInstanceLog">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="parInstanceID" type="s:string"/>
+        <s:element minOccurs="0" name="parLog" type="s0:EMixInstanceLog"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="EMixInstanceLog">
+    <s:sequence>
+        <s:element minOccurs="0" name="ID" type="s:string"/>
+        <s:element minOccurs="0" name="Action" type="s:string"/>
+        <s:element minOccurs="0" name="OperateDate" type="s:string"/>
+        <s:element minOccurs="0" name="FinalStatus" type="s:string"/>
+        <s:element minOccurs="0" name="InitStatus" type="s:string"/>
+        <s:element minOccurs="0" name="OperateTime" type="s:string"/>
+        <s:element minOccurs="0" name="OperateUserID" type="s:string"/>
+        <s:element minOccurs="0" name="OperateMachineIP" type="s:string"/>
+        <s:element minOccurs="0" name="RealOperateUserID" type="s:string"/>
+        <s:element minOccurs="0" name="OperateUserName" type="s:string"/>
+        <s:element minOccurs="0" name="IsNewFramework" type="s:string"/>
+        <s:element minOccurs="0" name="EpisodeID" type="s:string"/>
+        <s:element minOccurs="0" name="PrintTemplateDocID" type="s:string"/>
+        <s:element minOccurs="0" name="TemplateDocID" type="s:string"/>
+        <s:element minOccurs="0" name="StateInfo" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+<s:element name="AddInstanceLogResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AddInstanceLogResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="AddLog">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="parInstanceID" type="s:string"/>
+        <s:element minOccurs="0" name="parLog" type="s0:EInstanceLog"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="EInstanceLog">
+    <s:sequence>
+        <s:element minOccurs="0" name="Action" type="s:string"/>
+        <s:element minOccurs="0" name="OperateDate" type="s:string"/>
+        <s:element minOccurs="0" name="FinalStatus" type="s:string"/>
+        <s:element minOccurs="0" name="InitStatus" type="s:string"/>
+        <s:element minOccurs="0" name="OperateTime" type="s:string"/>
+        <s:element minOccurs="0" name="OperateUserID" type="s:string"/>
+        <s:element minOccurs="0" name="OperateMachineIP" type="s:string"/>
+        <s:element minOccurs="0" name="RealOperateUserID" type="s:string"/>
+        <s:element minOccurs="0" name="OperateUserName" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+<s:element name="AddLogResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AddLogResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ChangeStatus">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="parInstanceID" type="s:string"/>
+        <s:element minOccurs="0" name="parStatus" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ChangeStatusResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="ChangeStatusResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="CheckFinalStatus">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AInstanceID" type="s:string"/>
+        <s:element minOccurs="0" name="parStatusStr" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="CheckFinalStatusResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="CheckFinalStatusResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="CheckHappenDateTimeValid">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AECRecord" type="s:string"/>
+        <s:element minOccurs="0" name="AInstanceID" type="s:string"/>
+        <s:element minOccurs="0" name="AHappendDate" type="s:string"/>
+        <s:element minOccurs="0" name="AHappendTime" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="CheckHappenDateTimeValidResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="CheckHappenDateTimeValidResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ClearLog">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="parInstanceID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ClearLogResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="ClearLogResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetAllLogs">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AInstanceID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetAllLogsResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetAllLogsResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetCurrentStatus">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="parInstanceID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetCurrentStatusResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetCurrentStatusResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetData">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="APatientID" type="s:string"/>
+        <s:element minOccurs="0" name="AEpisodeID" type="s:string"/>
+        <s:element minOccurs="0" name="AChartItemID" type="s:string"/>
+        <s:element minOccurs="0" name="AChartItemType" type="s:string"/>
+        <s:element minOccurs="0" name="AChartListNo" type="s:string"/>
+        <s:element minOccurs="0" name="ATemplateID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetDataResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetDataResult" type="s0:EInstanceData"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="EInstanceData">
+    <s:sequence>
+        <s:element minOccurs="0" name="CategoryID" type="s:string"/>
+        <s:element minOccurs="0" name="CategoryType" type="s:string"/>
+        <s:element minOccurs="0" name="ChartItemID" type="s:string"/>
+        <s:element minOccurs="0" name="ChartItemType" type="s:string"/>
+        <s:element minOccurs="0" name="CreateDate" type="s:date"/>
+        <s:element minOccurs="0" name="CreateTime" type="s0:Time"/>
+        <s:element minOccurs="0" name="CreateUser" type="s:string"/>
+        <s:element minOccurs="0" name="EpisodeID" type="s:string"/>
+        <s:element minOccurs="0" name="GroupItemID" type="s:string"/>
+        <s:element minOccurs="0" name="GroupItemName" type="s:string"/>
+        <s:element minOccurs="0" name="HappenDate" type="s:date"/>
+        <s:element minOccurs="0" name="HappenTime" type="s0:Time"/>
+        <s:element minOccurs="0" name="ID" type="s:string"/>
+        <s:element minOccurs="0" name="InstanceData" type="s:string"/>
+        <s:element minOccurs="0" name="ListNo" type="s:string"/>
+        <s:element minOccurs="0" name="MetaData" type="s:string"/>
+        <s:element minOccurs="0" name="ModifyDate" type="s:date"/>
+        <s:element minOccurs="0" name="ModifyTime" type="s0:Time"/>
+        <s:element minOccurs="0" name="ModifyUser" type="s:string"/>
+        <s:element minOccurs="0" name="PatientID" type="s:string"/>
+        <s:element minOccurs="0" name="PresentationData" type="s:string"/>
+        <s:element minOccurs="0" name="Status" type="s:string"/>
+        <s:element minOccurs="0" name="TemplateID" type="s:string"/>
+        <s:element minOccurs="0" name="TemplateVersion" type="s:long"/>
+        <s:element minOccurs="0" name="TheECRecord" type="s:string"/>
+        <s:element minOccurs="0" name="Title" type="s:string"/>
+        <s:element minOccurs="0" name="Remark" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+<s:simpleType name="Time">
+    <s:restriction base="s:time"/>
+</s:simpleType>
+<s:element name="GetDataByID">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetDataByIDResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetDataByIDResult" type="s0:EInstanceData"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetDataByInstanceID">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AInstanceDataID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetDataByInstanceIDResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetDataByInstanceIDResult" type="s0:ReStreamData"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="ReStreamData">
+    <s:sequence>
+        <s:element minOccurs="0" name="StreamData" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+<s:element name="GetDescDataByID">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetDescDataByIDResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetDescDataByIDResult" type="s0:EInstanceData"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetFinalLog">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AInstanceID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetFinalLogResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetFinalLogResult" type="s0:EInstanceLog"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetGroupDataByID">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetGroupDataByIDResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetGroupDataByIDResult" type="s0:EInstanceData"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetGroupItemList">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="APatientID" type="s:string"/>
+        <s:element minOccurs="0" name="AEpisodeID" type="s:string"/>
+        <s:element minOccurs="0" name="AEpisodeType" type="s:string"/>
+        <s:element minOccurs="0" name="AChartItemID" type="s:string"/>
+        <s:element minOccurs="0" name="AChartItemType" type="s:string"/>
+        <s:element minOccurs="0" name="ACategoryType" type="s:string"/>
+        <s:element minOccurs="0" name="ACategoryID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetGroupItemListResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetGroupItemListResult" type="s0:EInsGroupNewDataSet"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:complexType name="EInsGroupNewDataSet">
+    <s:sequence>
+        <s:any namespace="http://www.dhcc.com.cn/epr/metaservice/SELECTGroupListNew"/>
+    </s:sequence>
+</s:complexType>
+<s:element name="GetInstanceData">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="aEpisodeId" type="s:string"/>
+        <s:element minOccurs="0" name="aTemplateId" type="s:string"/>
+        <s:element minOccurs="0" name="aMountCategoryId" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetInstanceDataResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetInstanceDataResult" type="s0:EInstanceData"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetKBDiagnosIDByEpisodeID">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AEpisodeID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetKBDiagnosIDByEpisodeIDResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetKBDiagnosIDByEpisodeIDResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetMultipleData">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="APatientID" type="s:string"/>
+        <s:element minOccurs="0" name="AEpisodeID" type="s:string"/>
+        <s:element minOccurs="0" name="AChartItemID" type="s:string"/>
+        <s:element minOccurs="0" name="AChartItemType" type="s:string"/>
+        <s:element minOccurs="0" name="AChartListNo" type="s:string"/>
+        <s:element minOccurs="0" name="ATemplateID" type="s:string"/>
+        <s:element minOccurs="0" name="ACategoryID" type="s:string"/>
+        <s:element minOccurs="0" name="ACategoryType" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetMultipleDataResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetMultipleDataResult" type="s0:EInstanceData"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetNormalData">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="APatientID" type="s:string"/>
+        <s:element minOccurs="0" name="AEpisodeID" type="s:string"/>
+        <s:element minOccurs="0" name="AEpisodeType" type="s:string"/>
+        <s:element minOccurs="0" name="AChartItemID" type="s:string"/>
+        <s:element minOccurs="0" name="AChartItemType" type="s:string"/>
+        <s:element minOccurs="0" name="ACategoryType" type="s:string"/>
+        <s:element minOccurs="0" name="ACategoryID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetNormalDataResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetNormalDataResult" type="s0:EInstanceData"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetNormalDataOld">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="APatientID" type="s:string"/>
+        <s:element minOccurs="0" name="AEpisodeID" type="s:string"/>
+        <s:element minOccurs="0" name="AEpisodeType" type="s:string"/>
+        <s:element minOccurs="0" name="AChartItemID" type="s:string"/>
+        <s:element minOccurs="0" name="AChartItemType" type="s:string"/>
+        <s:element minOccurs="0" name="ACategoryType" type="s:string"/>
+        <s:element minOccurs="0" name="ACategoryID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetNormalDataOldResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetNormalDataOldResult" type="s0:EInstanceData"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetParentGroupList">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="APatientID" type="s:string"/>
+        <s:element minOccurs="0" name="AEpisodeID" type="s:string"/>
+        <s:element minOccurs="0" name="AEpisodeType" type="s:string"/>
+        <s:element minOccurs="0" name="AChartItemID" type="s:string"/>
+        <s:element minOccurs="0" name="AChartItemType" type="s:string"/>
+        <s:element minOccurs="0" name="ACategoryType" type="s:string"/>
+        <s:element minOccurs="0" name="ACategoryID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetParentGroupListResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetParentGroupListResult" type="s0:EInsGroupNewDataSet"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetRefInstanceID">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AEpisodeID" type="s:string"/>
+        <s:element minOccurs="0" name="ATemplateID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetRefInstanceIDResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetRefInstanceIDResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetTemplateIDByID">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="argInstanceId" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="GetTemplateIDByIDResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="GetTemplateIDByIDResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ImportInstanceData">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="aEInstanceData" type="s0:EInstanceData"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ImportInstanceDataResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="ImportInstanceDataResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="InitAfterMultiOper">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="parAction" type="s:string"/>
+        <s:element minOccurs="0" name="parEpisodeID" type="s:string"/>
+        <s:element minOccurs="0" name="parEprDocID" type="s:string"/>
+        <s:element minOccurs="0" name="parEprNum" type="s:string"/>
+        <s:element minOccurs="0" name="parIP" type="s:string"/>
+        <s:element minOccurs="0" name="parHappenDate" type="s:string"/>
+        <s:element minOccurs="0" name="parHappenTime" type="s:string"/>
+        <s:element minOccurs="0" name="parUserID" type="s:string"/>
+        <s:element minOccurs="0" name="parTemplateID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="InitAfterMultiOperResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="InitAfterMultiOperResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="InitAfterSingleOper">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="parAction" type="s:string"/>
+        <s:element minOccurs="0" name="parEpisodeID" type="s:string"/>
+        <s:element minOccurs="0" name="parEprDocID" type="s:string"/>
+        <s:element minOccurs="0" name="parEprNum" type="s:string"/>
+        <s:element minOccurs="0" name="parTemplateDocID" type="s:string"/>
+        <s:element minOccurs="0" name="parHappenDate" type="s:string"/>
+        <s:element minOccurs="0" name="parHappenTime" type="s:string"/>
+        <s:element minOccurs="0" name="parIP" type="s:string"/>
+        <s:element minOccurs="0" name="parUserID" type="s:string"/>
+        <s:element minOccurs="0" name="parTemplateID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="InitAfterSingleOperResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="InitAfterSingleOperResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ReplaceGroupData">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AInstanceID" type="s:string"/>
+        <s:element minOccurs="0" name="ATemplateID" type="s:string"/>
+        <s:element minOccurs="0" name="ATemplateName" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ReplaceGroupDataResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="ReplaceGroupDataResult" type="s0:EInstanceData"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ReplaceTemplateData">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AInstanceID" type="s:string"/>
+        <s:element minOccurs="0" name="ATemplateID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="ReplaceTemplateDataResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="ReplaceTemplateDataResult" type="s0:EInstanceData"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="SaveData">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AEInstanceData" type="s0:EInstanceData"/>
+        <s:element minOccurs="0" name="AEMixInstanceLog" type="s0:EMixInstanceLog"/>
+        <s:element minOccurs="0" name="AErrorMessage" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="SaveDataResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="SaveDataResult" type="s0:EInstanceData"/>
+        <s:element minOccurs="0" name="AEMixInstanceLog" type="s0:EMixInstanceLog"/>
+        <s:element minOccurs="0" name="AErrorMessage" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="SaveMultipleData">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="AEInstanceData" type="s0:EInstanceData"/>
+        <s:element minOccurs="0" name="AEMixInstanceLog" type="s0:EMixInstanceLog"/>
+        <s:element minOccurs="0" name="AErrorMessage" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="SaveMultipleDataResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="SaveMultipleDataResult" type="s0:EInstanceData"/>
+        <s:element minOccurs="0" name="AEMixInstanceLog" type="s0:EMixInstanceLog"/>
+        <s:element minOccurs="0" name="AErrorMessage" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="TestSaveMultipleData">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="aId" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="TestSaveMultipleDataResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="TestSaveMultipleDataResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="UpdateEPRLogs">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="parEpisodeID" type="s:string"/>
+        <s:element minOccurs="0" name="parAllStr" type="s:string"/>
+        <s:element minOccurs="0" name="parAction" type="s:string"/>
+        <s:element minOccurs="0" name="parIP" type="s:string"/>
+        <s:element minOccurs="0" name="parUserID" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+<s:element name="UpdateEPRLogsResponse">
+<s:complexType>
+    <s:sequence>
+        <s:element minOccurs="0" name="UpdateEPRLogsResult" type="s:string"/>
+    </s:sequence>
+</s:complexType>
+</s:element>
+</s:schema>
+  </types>
+  <message name="GetGroupDataByIDSoapIn">
+    <part name="parameters" element="s0:GetGroupDataByID">
+    </part>
+  </message>
+  <message name="GetParentGroupListSoapOut">
+    <part name="parameters" element="s0:GetParentGroupListResponse">
+    </part>
+  </message>
+  <message name="GetInstanceDataSoapOut">
+    <part name="parameters" element="s0:GetInstanceDataResponse">
+    </part>
+  </message>
+  <message name="InitAfterSingleOperSoapIn">
+    <part name="parameters" element="s0:InitAfterSingleOper">
+    </part>
+  </message>
+  <message name="GetMultipleDataSoapIn">
+    <part name="parameters" element="s0:GetMultipleData">
+    </part>
+  </message>
+  <message name="InitAfterMultiOperSoapOut">
+    <part name="parameters" element="s0:InitAfterMultiOperResponse">
+    </part>
+  </message>
+  <message name="AddInstanceLogSoapIn">
+    <part name="parameters" element="s0:AddInstanceLog">
+    </part>
+  </message>
+  <message name="ChangeStatusSoapIn">
+    <part name="parameters" element="s0:ChangeStatus">
+    </part>
+  </message>
+  <message name="ClearLogSoapOut">
+    <part name="parameters" element="s0:ClearLogResponse">
+    </part>
+  </message>
+  <message name="AddLogSoapOut">
+    <part name="parameters" element="s0:AddLogResponse">
+    </part>
+  </message>
+  <message name="ImportInstanceDataSoapIn">
+    <part name="parameters" element="s0:ImportInstanceData">
+    </part>
+  </message>
+  <message name="GetNormalDataOldSoapOut">
+    <part name="parameters" element="s0:GetNormalDataOldResponse">
+    </part>
+  </message>
+  <message name="CheckFinalStatusSoapOut">
+    <part name="parameters" element="s0:CheckFinalStatusResponse">
+    </part>
+  </message>
+  <message name="SaveDataSoapOut">
+    <part name="parameters" element="s0:SaveDataResponse">
+    </part>
+  </message>
+  <message name="GetTemplateIDByIDSoapIn">
+    <part name="parameters" element="s0:GetTemplateIDByID">
+    </part>
+  </message>
+  <message name="UpdateEPRLogsSoapOut">
+    <part name="parameters" element="s0:UpdateEPRLogsResponse">
+    </part>
+  </message>
+  <message name="GetTemplateIDByIDSoapOut">
+    <part name="parameters" element="s0:GetTemplateIDByIDResponse">
+    </part>
+  </message>
+  <message name="UpdateEPRLogsSoapIn">
+    <part name="parameters" element="s0:UpdateEPRLogs">
+    </part>
+  </message>
+  <message name="GetNormalDataSoapOut">
+    <part name="parameters" element="s0:GetNormalDataResponse">
+    </part>
+  </message>
+  <message name="GetInstanceDataSoapIn">
+    <part name="parameters" element="s0:GetInstanceData">
+    </part>
+  </message>
+  <message name="AddLogSoapIn">
+    <part name="parameters" element="s0:AddLog">
+    </part>
+  </message>
+  <message name="GetDataByInstanceIDSoapIn">
+    <part name="parameters" element="s0:GetDataByInstanceID">
+    </part>
+  </message>
+  <message name="TestSaveMultipleDataSoapOut">
+    <part name="parameters" element="s0:TestSaveMultipleDataResponse">
+    </part>
+  </message>
+  <message name="GetDataByIDSoapIn">
+    <part name="parameters" element="s0:GetDataByID">
+    </part>
+  </message>
+  <message name="GetKBDiagnosIDByEpisodeIDSoapIn">
+    <part name="parameters" element="s0:GetKBDiagnosIDByEpisodeID">
+    </part>
+  </message>
+  <message name="AddInstanceLogSoapOut">
+    <part name="parameters" element="s0:AddInstanceLogResponse">
+    </part>
+  </message>
+  <message name="GetCurrentStatusSoapOut">
+    <part name="parameters" element="s0:GetCurrentStatusResponse">
+    </part>
+  </message>
+  <message name="GetParentGroupListSoapIn">
+    <part name="parameters" element="s0:GetParentGroupList">
+    </part>
+  </message>
+  <message name="InitAfterMultiOperSoapIn">
+    <part name="parameters" element="s0:InitAfterMultiOper">
+    </part>
+  </message>
+  <message name="GetNormalDataSoapIn">
+    <part name="parameters" element="s0:GetNormalData">
+    </part>
+  </message>
+  <message name="GetDescDataByIDSoapOut">
+    <part name="parameters" element="s0:GetDescDataByIDResponse">
+    </part>
+  </message>
+  <message name="ReplaceGroupDataSoapIn">
+    <part name="parameters" element="s0:ReplaceGroupData">
+    </part>
+  </message>
+  <message name="GetKBDiagnosIDByEpisodeIDSoapOut">
+    <part name="parameters" element="s0:GetKBDiagnosIDByEpisodeIDResponse">
+    </part>
+  </message>
+  <message name="GetMultipleDataSoapOut">
+    <part name="parameters" element="s0:GetMultipleDataResponse">
+    </part>
+  </message>
+  <message name="GetAllLogsSoapIn">
+    <part name="parameters" element="s0:GetAllLogs">
+    </part>
+  </message>
+  <message name="ReplaceGroupDataSoapOut">
+    <part name="parameters" element="s0:ReplaceGroupDataResponse">
+    </part>
+  </message>
+  <message name="GetGroupItemListSoapIn">
+    <part name="parameters" element="s0:GetGroupItemList">
+    </part>
+  </message>
+  <message name="ImportInstanceDataSoapOut">
+    <part name="parameters" element="s0:ImportInstanceDataResponse">
+    </part>
+  </message>
+  <message name="GetAllLogsSoapOut">
+    <part name="parameters" element="s0:GetAllLogsResponse">
+    </part>
+  </message>
+  <message name="ReplaceTemplateDataSoapIn">
+    <part name="parameters" element="s0:ReplaceTemplateData">
+    </part>
+  </message>
+  <message name="CheckHappenDateTimeValidSoapIn">
+    <part name="parameters" element="s0:CheckHappenDateTimeValid">
+    </part>
+  </message>
+  <message name="SaveMultipleDataSoapIn">
+    <part name="parameters" element="s0:SaveMultipleData">
+    </part>
+  </message>
+  <message name="GetRefInstanceIDSoapOut">
+    <part name="parameters" element="s0:GetRefInstanceIDResponse">
+    </part>
+  </message>
+  <message name="ReplaceTemplateDataSoapOut">
+    <part name="parameters" element="s0:ReplaceTemplateDataResponse">
+    </part>
+  </message>
+  <message name="CheckFinalStatusSoapIn">
+    <part name="parameters" element="s0:CheckFinalStatus">
+    </part>
+  </message>
+  <message name="GetNormalDataOldSoapIn">
+    <part name="parameters" element="s0:GetNormalDataOld">
+    </part>
+  </message>
+  <message name="GetDataByIDSoapOut">
+    <part name="parameters" element="s0:GetDataByIDResponse">
+    </part>
+  </message>
+  <message name="SaveMultipleDataSoapOut">
+    <part name="parameters" element="s0:SaveMultipleDataResponse">
+    </part>
+  </message>
+  <message name="ClearLogSoapIn">
+    <part name="parameters" element="s0:ClearLog">
+    </part>
+  </message>
+  <message name="GetFinalLogSoapIn">
+    <part name="parameters" element="s0:GetFinalLog">
+    </part>
+  </message>
+  <message name="GetRefInstanceIDSoapIn">
+    <part name="parameters" element="s0:GetRefInstanceID">
+    </part>
+  </message>
+  <message name="TestSaveMultipleDataSoapIn">
+    <part name="parameters" element="s0:TestSaveMultipleData">
+    </part>
+  </message>
+  <message name="GetFinalLogSoapOut">
+    <part name="parameters" element="s0:GetFinalLogResponse">
+    </part>
+  </message>
+  <message name="GetDataSoapOut">
+    <part name="parameters" element="s0:GetDataResponse">
+    </part>
+  </message>
+  <message name="GetCurrentStatusSoapIn">
+    <part name="parameters" element="s0:GetCurrentStatus">
+    </part>
+  </message>
+  <message name="GetDescDataByIDSoapIn">
+    <part name="parameters" element="s0:GetDescDataByID">
+    </part>
+  </message>
+  <message name="GetGroupDataByIDSoapOut">
+    <part name="parameters" element="s0:GetGroupDataByIDResponse">
+    </part>
+  </message>
+  <message name="GetDataByInstanceIDSoapOut">
+    <part name="parameters" element="s0:GetDataByInstanceIDResponse">
+    </part>
+  </message>
+  <message name="ChangeStatusSoapOut">
+    <part name="parameters" element="s0:ChangeStatusResponse">
+    </part>
+  </message>
+  <message name="CheckHappenDateTimeValidSoapOut">
+    <part name="parameters" element="s0:CheckHappenDateTimeValidResponse">
+    </part>
+  </message>
+  <message name="GetDataSoapIn">
+    <part name="parameters" element="s0:GetData">
+    </part>
+  </message>
+  <message name="InitAfterSingleOperSoapOut">
+    <part name="parameters" element="s0:InitAfterSingleOperResponse">
+    </part>
+  </message>
+  <message name="SaveDataSoapIn">
+    <part name="parameters" element="s0:SaveData">
+    </part>
+  </message>
+  <message name="GetGroupItemListSoapOut">
+    <part name="parameters" element="s0:GetGroupItemListResponse">
+    </part>
+  </message>
+  <portType name="InstanceDataInfoSoap">
+    <operation name="AddInstanceLog">
+      <input message="s0:AddInstanceLogSoapIn">
+    </input>
+      <output message="s0:AddInstanceLogSoapOut">
+    </output>
+    </operation>
+    <operation name="AddLog">
+      <input message="s0:AddLogSoapIn">
+    </input>
+      <output message="s0:AddLogSoapOut">
+    </output>
+    </operation>
+    <operation name="ChangeStatus">
+      <input message="s0:ChangeStatusSoapIn">
+    </input>
+      <output message="s0:ChangeStatusSoapOut">
+    </output>
+    </operation>
+    <operation name="CheckFinalStatus">
+      <input message="s0:CheckFinalStatusSoapIn">
+    </input>
+      <output message="s0:CheckFinalStatusSoapOut">
+    </output>
+    </operation>
+    <operation name="CheckHappenDateTimeValid">
+      <input message="s0:CheckHappenDateTimeValidSoapIn">
+    </input>
+      <output message="s0:CheckHappenDateTimeValidSoapOut">
+    </output>
+    </operation>
+    <operation name="ClearLog">
+      <input message="s0:ClearLogSoapIn">
+    </input>
+      <output message="s0:ClearLogSoapOut">
+    </output>
+    </operation>
+    <operation name="GetAllLogs">
+      <input message="s0:GetAllLogsSoapIn">
+    </input>
+      <output message="s0:GetAllLogsSoapOut">
+    </output>
+    </operation>
+    <operation name="GetCurrentStatus">
+      <input message="s0:GetCurrentStatusSoapIn">
+    </input>
+      <output message="s0:GetCurrentStatusSoapOut">
+    </output>
+    </operation>
+    <operation name="GetData">
+      <input message="s0:GetDataSoapIn">
+    </input>
+      <output message="s0:GetDataSoapOut">
+    </output>
+    </operation>
+    <operation name="GetDataByID">
+      <input message="s0:GetDataByIDSoapIn">
+    </input>
+      <output message="s0:GetDataByIDSoapOut">
+    </output>
+    </operation>
+    <operation name="GetDataByInstanceID">
+      <input message="s0:GetDataByInstanceIDSoapIn">
+    </input>
+      <output message="s0:GetDataByInstanceIDSoapOut">
+    </output>
+    </operation>
+    <operation name="GetDescDataByID">
+      <input message="s0:GetDescDataByIDSoapIn">
+    </input>
+      <output message="s0:GetDescDataByIDSoapOut">
+    </output>
+    </operation>
+    <operation name="GetFinalLog">
+      <input message="s0:GetFinalLogSoapIn">
+    </input>
+      <output message="s0:GetFinalLogSoapOut">
+    </output>
+    </operation>
+    <operation name="GetGroupDataByID">
+      <input message="s0:GetGroupDataByIDSoapIn">
+    </input>
+      <output message="s0:GetGroupDataByIDSoapOut">
+    </output>
+    </operation>
+    <operation name="GetGroupItemList">
+      <input message="s0:GetGroupItemListSoapIn">
+    </input>
+      <output message="s0:GetGroupItemListSoapOut">
+    </output>
+    </operation>
+    <operation name="GetInstanceData">
+      <input message="s0:GetInstanceDataSoapIn">
+    </input>
+      <output message="s0:GetInstanceDataSoapOut">
+    </output>
+    </operation>
+    <operation name="GetKBDiagnosIDByEpisodeID">
+      <input message="s0:GetKBDiagnosIDByEpisodeIDSoapIn">
+    </input>
+      <output message="s0:GetKBDiagnosIDByEpisodeIDSoapOut">
+    </output>
+    </operation>
+    <operation name="GetMultipleData">
+      <input message="s0:GetMultipleDataSoapIn">
+    </input>
+      <output message="s0:GetMultipleDataSoapOut">
+    </output>
+    </operation>
+    <operation name="GetNormalData">
+      <input message="s0:GetNormalDataSoapIn">
+    </input>
+      <output message="s0:GetNormalDataSoapOut">
+    </output>
+    </operation>
+    <operation name="GetNormalDataOld">
+      <input message="s0:GetNormalDataOldSoapIn">
+    </input>
+      <output message="s0:GetNormalDataOldSoapOut">
+    </output>
+    </operation>
+    <operation name="GetParentGroupList">
+      <input message="s0:GetParentGroupListSoapIn">
+    </input>
+      <output message="s0:GetParentGroupListSoapOut">
+    </output>
+    </operation>
+    <operation name="GetRefInstanceID">
+      <input message="s0:GetRefInstanceIDSoapIn">
+    </input>
+      <output message="s0:GetRefInstanceIDSoapOut">
+    </output>
+    </operation>
+    <operation name="GetTemplateIDByID">
+      <input message="s0:GetTemplateIDByIDSoapIn">
+    </input>
+      <output message="s0:GetTemplateIDByIDSoapOut">
+    </output>
+    </operation>
+    <operation name="ImportInstanceData">
+      <input message="s0:ImportInstanceDataSoapIn">
+    </input>
+      <output message="s0:ImportInstanceDataSoapOut">
+    </output>
+    </operation>
+    <operation name="InitAfterMultiOper">
+      <input message="s0:InitAfterMultiOperSoapIn">
+    </input>
+      <output message="s0:InitAfterMultiOperSoapOut">
+    </output>
+    </operation>
+    <operation name="InitAfterSingleOper">
+      <input message="s0:InitAfterSingleOperSoapIn">
+    </input>
+      <output message="s0:InitAfterSingleOperSoapOut">
+    </output>
+    </operation>
+    <operation name="ReplaceGroupData">
+      <input message="s0:ReplaceGroupDataSoapIn">
+    </input>
+      <output message="s0:ReplaceGroupDataSoapOut">
+    </output>
+    </operation>
+    <operation name="ReplaceTemplateData">
+      <input message="s0:ReplaceTemplateDataSoapIn">
+    </input>
+      <output message="s0:ReplaceTemplateDataSoapOut">
+    </output>
+    </operation>
+    <operation name="SaveData">
+      <input message="s0:SaveDataSoapIn">
+    </input>
+      <output message="s0:SaveDataSoapOut">
+    </output>
+    </operation>
+    <operation name="SaveMultipleData">
+      <input message="s0:SaveMultipleDataSoapIn">
+    </input>
+      <output message="s0:SaveMultipleDataSoapOut">
+    </output>
+    </operation>
+    <operation name="TestSaveMultipleData">
+      <input message="s0:TestSaveMultipleDataSoapIn">
+    </input>
+      <output message="s0:TestSaveMultipleDataSoapOut">
+    </output>
+    </operation>
+    <operation name="UpdateEPRLogs">
+      <input message="s0:UpdateEPRLogsSoapIn">
+    </input>
+      <output message="s0:UpdateEPRLogsSoapOut">
+    </output>
+    </operation>
+  </portType>
+  <binding name="InstanceDataInfoSoap" type="s0:InstanceDataInfoSoap">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="AddInstanceLog">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.AddInstanceLog" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="AddLog">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.AddLog" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="ChangeStatus">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.ChangeStatus" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="CheckFinalStatus">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.CheckFinalStatus" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="CheckHappenDateTimeValid">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.CheckHappenDateTimeValid" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="ClearLog">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.ClearLog" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetAllLogs">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetAllLogs" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetCurrentStatus">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetCurrentStatus" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetData">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetData" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetDataByID">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetDataByID" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetDataByInstanceID">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetDataByInstanceID" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetDescDataByID">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetDescDataByID" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetFinalLog">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetFinalLog" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetGroupDataByID">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetGroupDataByID" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetGroupItemList">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetGroupItemList" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetInstanceData">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetInstanceData" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetKBDiagnosIDByEpisodeID">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetKBDiagnosIDByEpisodeID" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetMultipleData">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetMultipleData" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetNormalData">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetNormalData" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetNormalDataOld">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetNormalDataOld" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetParentGroupList">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetParentGroupList" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetRefInstanceID">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetRefInstanceID" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="GetTemplateIDByID">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.GetTemplateIDByID" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="ImportInstanceData">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.ImportInstanceData" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="InitAfterMultiOper">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.InitAfterMultiOper" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="InitAfterSingleOper">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.InitAfterSingleOper" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="ReplaceGroupData">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.ReplaceGroupData" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="ReplaceTemplateData">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.ReplaceTemplateData" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="SaveData">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.SaveData" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="SaveMultipleData">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.SaveMultipleData" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="TestSaveMultipleData">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.TestSaveMultipleData" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="UpdateEPRLogs">
+      <soap:operation soapAction="http://www.dhcc.com.cn/epr/metaservice/EPRservice.BOInstanceData.UpdateEPRLogs" style="document"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="InstanceDataInfo">
+    <port name="InstanceDataInfoSoap" binding="s0:InstanceDataInfoSoap">
+      <soap:address location="http://172.26.100.32/dthealth/web/EPRservice.BOInstanceData.cls"/>
+    </port>
+  </service>
+</definitions>

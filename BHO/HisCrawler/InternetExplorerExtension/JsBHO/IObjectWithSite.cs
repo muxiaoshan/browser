@@ -5,6 +5,7 @@ namespace JsBHO
 {
     [ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    //在 IObjectWithSite.cs下,你需要指出IE的GUID, 这样才方便注册表的更改.
     [Guid("FC4801A3-2BA9-11CF-A229-00AA003D7352")]
     public interface IObjectWithSite
     {

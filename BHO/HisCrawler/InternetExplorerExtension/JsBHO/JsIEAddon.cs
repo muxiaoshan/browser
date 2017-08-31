@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Microsoft.Win32;
 using mshtml;
 using SHDocVw;
+using System.Threading;
 
 namespace JsBHO
 {
@@ -29,14 +30,14 @@ namespace JsBHO
                 if (pDisp != this.site)
                     return;
                 
-                var document = browser.Document as IHTMLDocument2;
+                /*var document = browser.Document as IHTMLDocument2;
                 //添加Javascript脚本
                 IHTMLElement head = (IHTMLElement)((IHTMLElementCollection)document.all.tags("head")).item(null, 0);
                 IHTMLScriptElement scriptElement = (IHTMLScriptElement)document.createElement("script");
                 scriptElement.type = "text/javascript";
                 scriptElement.text = "function bhoSearch(text){var kw=document.getElementById('kw');kw.value=text;var form = document.forms[0];form.submit();}";
                 ((HTMLHeadElement)head).appendChild((IHTMLDOMNode)scriptElement);
-                log.WriteLog("JS function bhoSearch() added.");
+                log.WriteLog("JS function bhoSearch() added.");*/               
             }
             catch (Exception ex)
             {
@@ -95,7 +96,8 @@ namespace JsBHO
         #endregion
 
         #region Implementation of IOleCommandTarget
-        static string TextToSearch = "BHO";
+        
+        SearchForm form;
         int IOleCommandTarget.QueryStatus(IntPtr pguidCmdGroup, uint cCmds, ref OLECMD prgCmds, IntPtr pCmdText)
         {
             return 0;
@@ -104,21 +106,32 @@ namespace JsBHO
         {
             try
             {
-                //log.WriteLog("启动JS BHO组件。");
-                // Accessing the document from the command-bar.
-                //log.WriteLog("browser:" + browser);
-                var document = browser.Document as IHTMLDocument2;
-                //log.WriteLog("document:" + document);
-                var window = document.parentWindow;
-                //log.WriteLog("window:" + window);
-                //var result = window.execScript(@"alert('You will now be allowed to configure the text to search...');");
+                form = new SearchForm();
+                //默认填写www.qq.com
+                form.URLText = browser.LocationURL;
+                form.KeyWordsText = "中国";
+                //给form表单按钮绑定事件
+                /*log.WriteLog("给form表单按钮绑定事件");
+                form.getNavigateBtn().Click += new EventHandler(navigate);
+                form.getCrawlBtn().Click += new EventHandler(crawl);
+                log.WriteLog("完成给form表单按钮绑定事件");*/
 
-                var form = new SearchForm();
-                form.InputText = TextToSearch;
-                if (form.ShowDialog() != DialogResult.Cancel)
+                //显示form
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    TextToSearch = form.InputText;
-                    search(window, document, TextToSearch);
+                    try
+                    {
+                        /*navigate();
+                        while (browser.ReadyState != tagREADYSTATE.READYSTATE_COMPLETE)
+                        {
+                            Thread.Sleep(500);
+                        }*/
+                        crawl();
+                    }
+                    catch (Exception exx)
+                    {
+                        log.WriteLog("爬取异常" + exx);
+                    }
                 }
             }
             catch (Exception ex)
@@ -128,12 +141,19 @@ namespace JsBHO
 
             return 0;
         }
-        void search(IHTMLWindow2 window, IHTMLDocument2 document, string textToSearch)
+        void navigate()
         {
-            log.WriteLog("开始搜索:" + textToSearch);
-            //执行Javascript脚本
-            window.execScript(@"bhoSearch('" + textToSearch + "');");
+            //浏览器跳转
+            browser.Navigate(form.URLText);
         }
+        void crawl()
+        {
+            log.WriteLog("开始爬取：[" + form.URLText + "]并搜索:[" + form.KeyWordsText + "]");
+            //方式二、解析dom元素
+            Crawler crawler = CrawlerFactory.getCrawler(form.URLText);
+            crawler.crawl(browser.Document, form.KeyWordsText);
+        }
+
         #endregion
 
         #region Registering with regasm

@@ -1,0 +1,5 @@
+辅助诊疗页面
+http://172.26.111.12/newAiadt/a/home/diagnosisTreatment?hzbm=514926&jzbm=1110205
+
+电子病历页面
+http://172.26.100.32/dthealth/web/csp/websys.csp?a=a&TMENU=50214&TPAGID=3242735760&TWKFLJ=websys.csp^1363680009&PatientID=783889&EpisodeID=2405124&mradm=2405124&WardID=69

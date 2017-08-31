@@ -1,6 +1,6 @@
 F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO\bin\Debug\JsBHO.dll
 F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO\bin\Debug\JsBHO.pdb
-F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO\obj\Debug\JsBHO.dll
-F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO\obj\Debug\JsBHO.pdb
 F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO\obj\Debug\JsBHO.SearchForm.resources
 F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO\obj\Debug\JsBHO.csproj.GenerateResource.Cache
+F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO\obj\Debug\JsBHO.dll
+F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO\obj\Debug\JsBHO.pdb

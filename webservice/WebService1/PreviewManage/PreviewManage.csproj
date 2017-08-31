@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{9BDABB4C-A5C8-424F-A86F-70106FCEAC4F}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <AssemblyName>PreviewManage</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="dhcc.epr.eprlib.previewmanage.Properties\Settings.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\CreateSysOptionCompletedEventArgs.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\CreateSysOptionCompletedEventHandler.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\DeleteSysOptionCompletedEventArgs.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\DeleteSysOptionCompletedEventHandler.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\ESysOption.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\ESysOptionDataset.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\GetValueByNameCompletedEventArgs.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\GetValueByNameCompletedEventHandler.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\SelectAllSysOptionCompletedEventArgs.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\SelectAllSysOptionCompletedEventHandler.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\SysOptionInfo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\UpdateSysOptionCompletedEventArgs.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\UpdateSysOptionCompletedEventHandler.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\UpdateSysOptionValueCompletedEventArgs.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage.SysOptionData\UpdateSysOptionValueCompletedEventHandler.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage\Configration.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage\FTPFactory.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage\OptionManager.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage\OptionValues.cs" />
+    <Compile Include="dhcc.epr.eprlib.previewmanage\UCCfg.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="dhcc.epr.eprlib.previewmanage\UCImageLoader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="dhcc.epr.eprlib.previewmanage\WebServicesLayer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="dhcc.epr.eprlib.previewmanage\UCCfg.resources" />
+    <EmbeddedResource Include="dhcc.epr.eprlib.previewmanage\UCImageLoader.resources" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

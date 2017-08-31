@@ -10,14 +10,21 @@ namespace JsBHO
 {
     public partial class SearchForm : Form
     {
+        
+        Log log = new Log();
         public SearchForm()
         {
             InitializeComponent();
         }
-        public string InputText
+        public string URLText
         {
-            get { return this.textBox1.Text; }
-            set { this.textBox1.Text = value; }
+            get { return this.url.Text; }
+            set { this.url.Text = value; }
         }
+        public string KeyWordsText
+        {
+            get { return this.keyWords.Text; }
+            set { this.keyWords.Text = value; }
+        }        
     }
 }

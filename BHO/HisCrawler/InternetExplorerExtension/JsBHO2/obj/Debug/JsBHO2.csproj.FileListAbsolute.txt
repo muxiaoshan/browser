@@ -1,8 +1,7 @@
-F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO2\obj\Debug\JsBHO2.csproj.GenerateResource.Cache
 F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO2\bin\Debug\JsBHO2.dll
 F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO2\bin\Debug\JsBHO2.pdb
 F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO2\bin\Debug\interop.shdocvw.dll
 F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO2\obj\Debug\JsBHO2.SearchForm.resources
+F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO2\obj\Debug\JsBHO2.csproj.GenerateResource.Cache
 F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO2\obj\Debug\JsBHO2.dll
 F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO2\obj\Debug\JsBHO2.pdb
-F:\projects\browser\BHO\HisCrawler\InternetExplorerExtension\JsBHO2\obj\Debug\JsBHO2.csprojResolveAssemblyReference.cache

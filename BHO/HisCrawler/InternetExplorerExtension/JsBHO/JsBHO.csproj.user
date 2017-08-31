@@ -3,6 +3,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartAction>Program</StartAction>
     <StartProgram>C:\Program Files\Internet Explorer\iexplore.exe</StartProgram>
-    <StartArguments>https://www.baidu.com/</StartArguments>
+    <StartArguments>http://news.baidu.com/</StartArguments>
   </PropertyGroup>
 </Project>
