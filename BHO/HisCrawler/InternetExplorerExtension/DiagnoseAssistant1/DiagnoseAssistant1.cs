@@ -24,47 +24,12 @@ namespace DiagnoseAssistant1
 
         Log log = new Log();
 
-        //KeyboardHook keyboardHook = new KeyboardHook();
-        /*
-An outgoing call cannot be made since the application is dispatching an input-synchronous call
-window.showModalDialog()报错，Additional information: 因为应用程序正在发送一个输入同步呼叫，所以无法执行传出的呼叫
-         * 
-All COM objects provided by the shdocvw and mshtml controls use the single- 
-threaded apartment model. To access them from a MTA you need to marshal the interfaces using CoMarshalInterThreadInterfaceInStream nad CoGetInterfaceAndReleaseStream
-        */
-        /*
-        globalKeyboardHook gkh = new globalKeyboardHook();
-
-        public DiagnoseAssistant1()
-        {
-            gkh.HookedKeys.Add(Keys.A);
-            gkh.HookedKeys.Add(Keys.B);
-            gkh.KeyDown += new KeyEventHandler(gkh_KeyDown);
-            gkh.KeyUp += new KeyEventHandler(gkh_KeyUp);
-            log.WriteLog("globalKeyboardHook initialized.");
-        }
-        void gkh_KeyUp(object sender, KeyEventArgs e)
-        {
-            log.WriteLog("Up\t" + e.KeyCode.ToString());
-            //访问辅助诊疗
-            accessFzzl();
-            e.Handled = true;
-        }
-        void gkh_KeyDown(object sender, KeyEventArgs e)
-        {
-            log.WriteLog("Down\t" + e.KeyCode.ToString());
-            e.Handled = true;
-        }
-        */
-
         //存放就诊编码
         static Episode _episode = null;
         /// <summary>
         /// 登录用户名
         /// </summary>
         static string username = null;
-        //const string fzzlLoginUrl = "http://172.26.111.12/newAiadt/a";
-        //const string fzzlUrlPrefix = fzzlLoginUrl + "/home/login";
         const string fzzlUrlPrefix = "http://172.26.111.12/newAiadt/a/home/login";
         
         #region OnDocumentComplete
@@ -92,10 +57,10 @@ threaded apartment model. To access them from a MTA you need to marshal the inte
                     }
                     //访问门诊患者列表页面
                     else if (urlStr.Contains("websys.csp?a=a&TMENU=50136"))
-                    {
-                        log.WriteLog("访问门诊患者列表页面。已查看并暂存的门诊患者电子病历数，episode=" + _episode.ToString() + "，非null则访问辅助诊疗页面。");
+                    {                        
                         if (_episode != null)
                         {
+                            log.WriteLog("访问门诊患者列表页面。已查看并暂存的门诊患者电子病历数，episode=" + _episode.ToString() + "，非null则访问辅助诊疗页面。");
                             accessFzzl();
                         }
                     }
@@ -204,7 +169,7 @@ threaded apartment model. To access them from a MTA you need to marshal the inte
         {
             try
             {
-                log.WriteLog("已查看并暂存的门诊患者电子病历，episodes=" + _episode.ToString());
+                
                 if (_episode == null)
                 {
                     //MessageBox.Show("没有查看过电子病历");
@@ -214,6 +179,7 @@ threaded apartment model. To access them from a MTA you need to marshal the inte
                 }
                 else
                 {
+                    log.WriteLog("已查看并暂存的门诊患者电子病历，episodes=" + _episode.ToString());
                     accessFzzl();
                 }
             }

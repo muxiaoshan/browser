@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Text.RegularExpressions;
 using mshtml;
 using SHDocVw;
 using System.Collections;
@@ -133,16 +134,28 @@ namespace DiagnoseAssistant1.crawler
                         {
                             //把单元格中的检查与建议内容抓取出来
                             crawlScanAndSuggestion(td, se);
+                            
                         }
                     }
                     /*
                     string updateSql = "update tb_hyft_jcjl set YXBXHJCSJ = '" + se.YXBXHJCSJ + "', JCZDHTS='" + se.JCZDHTS
                         + "' where JCH='" + se.TStudyNoz + "' and HZBM='" + episode.PatientID + "' and JZBM='" + episode.EpisodeID + "'";
                      * */
-                    string updateSql = "update tb_hyft_jcjl set YXBXHJCSJ = '" + se.YXBXHJCSJ + "', JCZDHTS='" + se.JCZDHTS
-                        + "' where JCH='" + se.TStudyNoz + "'";
-                    log.WriteLog("更新报告检查意见与诊断意见，sql=" + updateSql);
-                    //sqlOp.executeUpdate(updateSql);
+                    if (se.YXBXHJCSJ != null || se.JCZDHTS != null)
+                    {
+                        if (se.YXBXHJCSJ != null)
+                        {
+                            se.YXBXHJCSJ = se.YXBXHJCSJ.Replace("'", " ");
+                        }
+                        if (se.JCZDHTS != null)
+                        {
+                            se.JCZDHTS = se.JCZDHTS.Replace("'", " ");
+                        }
+                        string updateSql = "update tb_hyft_jcjl set YXBXHJCSJ = '" + se.YXBXHJCSJ + "', JCZDHTS='" + se.JCZDHTS
+                            + "' where JCH='" + se.TStudyNoz + "'";
+                        log.WriteLog("更新报告检查意见与诊断意见，sql=" + updateSql);
+                        sqlOp.executeUpdate(updateSql);
+                    }
                 }
             }
             catch (Exception e)
@@ -159,15 +172,17 @@ namespace DiagnoseAssistant1.crawler
         private void crawlScanAndSuggestion(mshtml.IHTMLElement td, ScanEntity se)
         {
             string content = td.innerText;
-            if (content != null)
+            if (content != null && !"".Equals(content.Trim()))
             {
+                //log.WriteLog("报告原文：【" + content + "】");
                 if (content.Contains("检查所见"))
                 {
-                    se.YXBXHJCSJ = EpisodeRegexUtils.getFirstMatchedFromString(content, @"^检查所见:\s*?(\S+)$", true);
+
+                    se.YXBXHJCSJ = EpisodeRegexUtils.getFirstMatchedFromString(content, @"^\s*检查所见:\s*\n+(.+)$", true);                    
                 }
                 else if (content.Contains("诊断意见"))
                 {
-                    se.JCZDHTS = EpisodeRegexUtils.getFirstMatchedFromString(content, @"^检查所见:\s*?(\S+)$", true);
+                    se.JCZDHTS = EpisodeRegexUtils.getFirstMatchedFromString(content, @"^\s*诊断意见:\s*\n+(.+)$", true);                    
                 }
             }
 
