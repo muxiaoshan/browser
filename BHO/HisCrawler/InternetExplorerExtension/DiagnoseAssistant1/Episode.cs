@@ -11,5 +11,10 @@ namespace DiagnoseAssistant1
         public string PatientID { get; set; }
         //就诊编码
         public string EpisodeID { get; set; }
+        override
+        public string ToString()
+        {
+            return "[PatientID=" + PatientID + ", EpisodeID=" + EpisodeID + "]";
+        }
     }
 }

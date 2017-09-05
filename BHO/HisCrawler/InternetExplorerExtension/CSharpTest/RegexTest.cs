@@ -10,7 +10,7 @@ namespace DiagnoseAssistant1
     {
         public static void Main()
         {
-            test2();
+            test4();
         }
         static void test1()
         {
@@ -74,5 +74,37 @@ namespace DiagnoseAssistant1
             }
         }
 
+        static void test3()
+        {
+            string url = "http://172.26.102.4/RisWeb3/ReportContent.aspx?OID=2415677||29&USERID=2452&SID=1209052&LOC=549&STYLE=RIS3-4";
+            string regex = @"RisWeb3/ReportContent[.]aspx(.+?)LOC=549[&]STYLE=RIS3[-]4$";
+            Regex rxPEID = new Regex(regex, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            Match m = rxPEID.Match(url);
+            if (m.Success)
+            {
+                Console.WriteLine("匹配成功");
+            }
+            else
+            {
+                Console.WriteLine("匹配失败");
+            }
+        }
+        static void test4()
+        {
+            string str = "检查所见: \n\n" +
+
+ "UCGB型：左心房内径29mm，左心室内径46mm，右心房、右心室大小正常范围。房室间隔连续性无中断，室间隔厚10mm，左心室后壁厚9mm,室壁运动正常、协调。各瓣膜回声正常，活动自如。主动脉根部内径28mm，壁回声正常，心包膜腔未见明显分离暗区。M型：二尖瓣前叶曲线呈双峰，E峰＜A峰；主动脉根部运动曲线主波存在，重搏波低平。CDFI：房室间隔未见明显过隔血流信号；各瓣口血流信号未见明显异常。 心功能检测：二尖瓣前叶曲线EF斜率50mm/s，EPSS6mm；左室EF值76%，FS45%，SV104ml/次，HR70次/分，节律齐；左室流出道血流Vmax:143cm/s，二尖瓣口血流频谱E峰57cm/s,A峰88cm/s。";
+            string regex = @"检查所见:\n+(^\n+)";
+            Regex rxPEID = new Regex(regex, RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline);
+            Match m = rxPEID.Match(str);
+            if (m.Success)
+            {
+                Console.WriteLine("匹配成功:" + m.Groups[1].ToString());
+            }
+            else
+            {
+                Console.WriteLine("匹配失败。");
+            }
+        }
     }
 }

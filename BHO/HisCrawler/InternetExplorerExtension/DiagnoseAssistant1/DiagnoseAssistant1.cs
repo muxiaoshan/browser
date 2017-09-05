@@ -9,6 +9,7 @@ using mshtml;
 using SHDocVw;
 using System.Threading;
 using System.Text.RegularExpressions;
+using DiagnoseAssistant1.crawler;
 
 namespace DiagnoseAssistant1
 {
@@ -57,8 +58,15 @@ threaded apartment model. To access them from a MTA you need to marshal the inte
         */
 
         //存放就诊编码
-        static ArrayList episodes = new ArrayList();
+        static Episode _episode = null;
+        /// <summary>
+        /// 登录用户名
+        /// </summary>
+        static string username = null;
+        //const string fzzlLoginUrl = "http://172.26.111.12/newAiadt/a";
+        //const string fzzlUrlPrefix = fzzlLoginUrl + "/home/login";
         const string fzzlUrlPrefix = "http://172.26.111.12/newAiadt/a/home/login";
+        
         #region OnDocumentComplete
         //页面加载，包括iframe内页面加载后调用
         void OnDocumentComplete(object pDisp, ref object URL)
@@ -74,19 +82,48 @@ threaded apartment model. To access them from a MTA you need to marshal the inte
                     {
                         Episode episode = EpisodeRegexUtils.getEpisodeFromUrl(urlStr);
                         log.WriteLog("访问门诊电子病历页面，暂存患者编码[" + episode.PatientID + "]与就诊编码[" + episode.EpisodeID + "]");
-                        episodes.Add(episode);
+                        _episode = episode;
+                        //在东华HIS系统中绑定不生效
+                        /*
+                        log.WriteLog("绑定键盘监听事件");
+                        IHTMLDocument2 document = browser.Document;
+                        ((mshtml.HTMLDocumentEvents2_Event)document).onkeyup += new mshtml.HTMLDocumentEvents2_onkeyupEventHandler(onKeyUp);
+                        */
                     }
                     //访问门诊患者列表页面
-                    if (urlStr.Contains("websys.csp?a=a&TMENU=50136"))
+                    else if (urlStr.Contains("websys.csp?a=a&TMENU=50136"))
                     {
-                        log.WriteLog("访问门诊患者列表页面。已查看并暂存的门诊患者电子病历数，episodes.Count=" + episodes.Count + "，大于0则访问辅助诊疗页面。");
-                        if (episodes.Count > 0)
+                        log.WriteLog("访问门诊患者列表页面。已查看并暂存的门诊患者电子病历数，episode=" + _episode.ToString() + "，非null则访问辅助诊疗页面。");
+                        if (_episode != null)
                         {
                             accessFzzl();
                         }
                     }
-                    IHTMLDocument2 document = browser.Document;
-                    ((mshtml.HTMLDocumentEvents2_Event)document).onkeyup += new mshtml.HTMLDocumentEvents2_onkeyupEventHandler(onKeyUp);
+                    //if (EpisodeRegexUtils.matchUrl(urlStr, "RisWeb3/ReportContent[.]aspx(.+?)LOC=549[&]STYLE=RIS3[-]4$"))
+                    //检查报告
+                    else if (urlStr.Contains("RisWeb3/ReportContent.aspx") || urlStr.Contains("csp/epr.chart.csp?PatientID="))
+                    {
+                        crawl(urlStr);
+                    }
+                    //获取登录名
+                    else if (urlStr.Contains("/web/csp/epr.menu.csp?LogonFromVB="))
+                    {
+                        IHTMLDocument2 document = browser.Document;
+                        foreach (IHTMLElement element in document.all)
+                        {
+                            if (element.tagName != null && element.tagName.ToUpper().Equals("HEAD"))
+                            {
+                                string headHTML = element.innerHTML;
+                                //log.WriteLog("head string in epr.menu.csp:\n" + headHTML);
+                                if (headHTML.Contains("session['LOGON.USERCODE']="))
+                                {
+                                    username = EpisodeRegexUtils.getFirstMatchedFromString(headHTML, @"session\['LOGON\.USERCODE'\]='(\w+?)'");
+                                    log.WriteLog("当前登录用户名=" + username);
+                                }
+                            }
+                        }
+                    }
+                    
                 }
                 // @Eric Stob: Thanks for this hint!
                 // This will prevent this method being executed more than once.
@@ -167,10 +204,12 @@ threaded apartment model. To access them from a MTA you need to marshal the inte
         {
             try
             {
-                log.WriteLog("已查看并暂存的门诊患者电子病历数，episodes.Count=" + episodes.Count);
-                if (episodes.Count == 0)
+                log.WriteLog("已查看并暂存的门诊患者电子病历，episodes=" + _episode.ToString());
+                if (_episode == null)
                 {
-                    MessageBox.Show("没有查看过电子病历");
+                    //MessageBox.Show("没有查看过电子病历");
+                    //打开辅助诊疗登录页面
+                    showFzzlModalDialog(fzzlUrlPrefix + "?hzbm=&jzbm=&username=" + username);
                     return 0;
                 }
                 else
@@ -185,37 +224,48 @@ threaded apartment model. To access them from a MTA you need to marshal the inte
 
             return 0;
         }
+        void crawl(string url)
+        {
+            //解析dom元素
+            Crawler crawler = CrawlerFactory.getCrawler(url);
+            if (crawler != null)
+            {
+                crawler.crawl(browser.Document);
+            }
+        }
         void onKeyUp(mshtml.IHTMLEventObj e)
         {
-            string keyCode = e.keyCode.ToString();
+            int keyCode = e.keyCode;
             log.WriteLog("keyCode=" + keyCode);
+            if (keyCode == 70) //F
+            {
+                accessFzzl();
+            }
+            
         }
         // Summary:
         //     访问辅助诊疗页面。
         //
         void accessFzzl()
         {
+            //取最近一个打开的病历
+            Episode episode = _episode;
+            string fzzlUrl = fzzlUrlPrefix + "?hzbm=" + episode.PatientID + "&jzbm=" + episode.EpisodeID + "&username=" + username;
+            showFzzlModalDialog(fzzlUrl);
+            //移除最后一个元素
+            _episode = null;
+        }
+        void showFzzlModalDialog(string url)
+        {
             IHTMLDocument2 document = browser.Document;
             IHTMLWindow2 window = document.parentWindow;
-            //取最近一个打开的病历
-            Episode episode = (Episode)episodes[episodes.Count - 1];
-            string fzzlUrl = fzzlUrlPrefix + "?hzbm=" + episode.PatientID + "&jzbm=" + episode.EpisodeID;
-            log.WriteLog("访问辅助诊疗页面，查看最近的电子病历信息：" + fzzlUrl);
             int screenWidth = window.screen.width;
             int screenHeight = window.screen.height;
-            //window.open 无法置顶窗口
-            /*IHTMLWindow2 window2 = window.open(fzzlUrl, "辅助诊疗",
-                "width=" + (screenWidth * 0.9) + ",height=" + (screenHeight * 0.8)
-                + ",location=0,menubar=0,toolbar=0");
-            window2.focus();*/
-            //window.showModalDialog可置顶窗口
-            window.showModalDialog(fzzlUrl, "辅助诊疗",
+            log.WriteLog("访问辅助诊疗页面：" + url);
+            window.showModalDialog(url, "辅助诊疗",
                 "dialogWidth=" + (screenWidth * 0.9) + "px;dialogHeight=" + (screenHeight * 0.8) + "px;center=yes");
-           
-            //移除最后一个元素
-            episodes.RemoveAt(episodes.Count - 1);
         }
-
+        
         #endregion
 
         #region Registering with regasm
