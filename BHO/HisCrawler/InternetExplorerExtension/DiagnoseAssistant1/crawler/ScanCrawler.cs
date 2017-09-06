@@ -4,15 +4,23 @@ using System.Text.RegularExpressions;
 using mshtml;
 using SHDocVw;
 using System.Collections;
+using System.Collections.Generic;
 using DiagnoseAssistant1.crawler.entity;
 
 
 namespace DiagnoseAssistant1.crawler
 {
+    abstract class ScanCrawler : HTMLCrawler
+    {
+        /// <summary>
+        /// 检查号
+        /// </summary>
+        public string JCH { get; set; }
+    }
     /// <summary>
     /// 检查列表抓取
     /// </summary>
-    class ScanListCrawler : Crawler
+    class ScanListCrawler : ScanCrawler
     {
         Log log = new Log("ScanListCrawler.txt");
         
@@ -25,17 +33,25 @@ namespace DiagnoseAssistant1.crawler
                 ArrayList scans = new ArrayList();
                 int i = 1;
                 ScanEntity se = null;
+                Dictionary<string, ScanEntity> jch2Bean = new Dictionary<string, ScanEntity>();
                 foreach (IHTMLElement ele in item.all)
                 {                    
                     if (ele.id != null && ele.id.Equals("TStudyNoz" + i))
-                    {                        
-                        se = new ScanEntity();
-                        se.TStudyNoz = ele.innerText;
-                        scans.Add(se);                        
+                    {
+                        string jch = ele.innerText;
+                        se = get(jch2Bean, jch);
+                        if (se == null)
+                        {
+                            se = new ScanEntity();
+                            jch2Bean.Add(jch, se);
+                            se.TStudyNoz = jch;
+                            scans.Add(se); 
+                        }
                     }
                     else if (ele.id != null && ele.id.Equals("TItemNamez" + i))
                     {
-                        se.TItemNamez = ele.innerText;
+                        //同一个检查号，检查名称合并
+                        se.TItemNamez = (se.TItemNamez == null ? "" : se.TItemNamez) + ele.innerText;
                     }
                     else if (ele.id != null && ele.id.Equals("TItemDatez" + i))
                     {
@@ -72,26 +88,47 @@ namespace DiagnoseAssistant1.crawler
                     else if (ele.id != null && ele.id.Equals("Memoz" + i))
                     {
                         se.Memoz = ele.innerText;
-                        i++; //处理完最后一个元素，i++准备处理下一个元素
-                        log.WriteLog("检查号:" + se.TStudyNoz + ",检查名称:" + se.TItemNamez + ",是否阳性:" + se.TIsIllz);
+                        i++; //处理完最后一个元素，i++准备处理下一个元素                        
                     }
                 }
                 insert2DB(scans);
             }
+        }
+        public static ScanEntity get(Dictionary<String, ScanEntity> jch2Entity, string jch)
+        {
+
+            foreach (var entry in jch2Entity)
+            {
+                if (jch.Equals(entry.Key))
+                {
+                    return (ScanEntity)entry.Value;
+                }
+            }
+            return null;
         }
         public void insert2DB(ArrayList scans)
         {
             ArrayList scanSqls = new ArrayList();            
             foreach (ScanEntity se in scans)
             {
-                // 先根据患者编码、就诊编码、检查名称、检查时间查询检查结果是否已存在
-                string qrySql = "select count(*) from tb_hyft_jcjl where HZBM='" + episode.PatientID + "' and JZBM='" + episode.EpisodeID 
-                    + "' and JCMC='"+se.TItemNamez+"' and JCSJ='"+se.TItemDatez+"'";
+                log.WriteLog("检查号:" + se.TStudyNoz + ",检查名称:" + se.TItemNamez + ",是否阳性:" + se.TIsIllz);
+                string qrySql;
+                if (se.TStudyNoz != null)
+                {
+                    //根据检查号判断检查结果是否已存在
+                    qrySql = "select count(*) from tb_hyft_jcjl where JCH = '" + se.TStudyNoz + "'";
+                }
+                else
+                {
+                    // 先根据患者编码、就诊编码、检查名称、开单时间查询检查结果是否已存在      
+                    qrySql = "select count(*) from tb_hyft_jcjl where HZBM='" + episode.PatientID + "' and JZBM='" + episode.EpisodeID 
+                        + "' and JCMC='"+se.TItemNamez+"' and KDSJ='"+se.TItemDatez+"'";
+                }
                 int cnt = sqlOp.executeCount(qrySql);
                 if (cnt == 0)
                 {
                     //MJ 测试标识
-                    string scanSql = "insert into tb_hyft_jcjl (HZBM, JZBM, JCH, JCMC, JCSJ, JCKSMC, BZHJY, MJ) values ('"
+                    string scanSql = "insert into tb_hyft_jcjl (HZBM, JZBM, JCH, JCMC, KDSJ, JCKSMC, BZHJY, MJ) values ('"
                         + episode.PatientID + "','" + episode.EpisodeID
                         + "','" + se.TStudyNoz + "','" + se.TItemNamez + "', '"
                         + se.TItemDatez + "', '" + se.TLocNamez + "', '"
@@ -113,13 +150,10 @@ namespace DiagnoseAssistant1.crawler
     /// <summary>
     /// 超声检查报告抓取
     /// </summary>
-    class UltrasonicCrawler : Crawler
+    class UltrasonicCrawler : ScanCrawler
     {
         Log log = new Log("UltrasonicCrawler.txt");
-        /// <summary>
-        /// 检查号
-        /// </summary>
-        public string JCH { get; set; }
+        
         public override void parseElement(IHTMLElement item)
         {
             try
@@ -188,4 +222,5 @@ namespace DiagnoseAssistant1.crawler
 
         }
     }
+    
 }

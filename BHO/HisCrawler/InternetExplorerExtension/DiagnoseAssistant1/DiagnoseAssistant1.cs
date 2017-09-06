@@ -48,12 +48,7 @@ namespace DiagnoseAssistant1
                         Episode episode = EpisodeRegexUtils.getEpisodeFromUrl(urlStr);
                         log.WriteLog("访问门诊电子病历页面，暂存患者编码[" + episode.PatientID + "]与就诊编码[" + episode.EpisodeID + "]");
                         _episode = episode;
-                        //在东华HIS系统中绑定不生效
-                        /*
-                        log.WriteLog("绑定键盘监听事件");
-                        IHTMLDocument2 document = browser.Document;
-                        ((mshtml.HTMLDocumentEvents2_Event)document).onkeyup += new mshtml.HTMLDocumentEvents2_onkeyupEventHandler(onKeyUp);
-                        */
+                        
                     }
                     //访问门诊患者列表页面
                     else if (urlStr.Contains("websys.csp?a=a&TMENU=50136"))
@@ -66,7 +61,8 @@ namespace DiagnoseAssistant1
                     }
                     //if (EpisodeRegexUtils.matchUrl(urlStr, "RisWeb3/ReportContent[.]aspx(.+?)LOC=549[&]STYLE=RIS3[-]4$"))
                     //检查报告
-                    else if (urlStr.Contains("RisWeb3/ReportContent.aspx") || urlStr.Contains("csp/epr.chart.csp?PatientID="))
+                    else if (urlStr.Contains("RisWeb3/ReportContent.aspx") || urlStr.Contains("csp/epr.chart.csp?PatientID=")
+                        || urlStr.ToUpper().EndsWith(".PDF"))
                     {
                         crawl(urlStr);
                     }
@@ -199,16 +195,7 @@ namespace DiagnoseAssistant1
                 crawler.crawl(browser.Document);
             }
         }
-        void onKeyUp(mshtml.IHTMLEventObj e)
-        {
-            int keyCode = e.keyCode;
-            log.WriteLog("keyCode=" + keyCode);
-            if (keyCode == 70) //F
-            {
-                accessFzzl();
-            }
-            
-        }
+        
         // Summary:
         //     访问辅助诊疗页面。
         //
@@ -216,7 +203,7 @@ namespace DiagnoseAssistant1
         {
             //取最近一个打开的病历
             Episode episode = _episode;
-            string fzzlUrl = fzzlUrlPrefix + "?hzbm=" + episode.PatientID + "&jzbm=" + episode.EpisodeID + "&username=" + username;
+            string fzzlUrl = "openChrome:" + fzzlUrlPrefix + "?param=hzbm_" + episode.PatientID + "_jzbm_" + episode.EpisodeID + "_username_" + username;
             showFzzlModalDialog(fzzlUrl);
             //移除最后一个元素
             _episode = null;
@@ -228,8 +215,9 @@ namespace DiagnoseAssistant1
             int screenWidth = window.screen.width;
             int screenHeight = window.screen.height;
             log.WriteLog("访问辅助诊疗页面：" + url);
-            window.showModalDialog(url, "辅助诊疗",
-                "dialogWidth=" + (screenWidth * 0.9) + "px;dialogHeight=" + (screenHeight * 0.8) + "px;center=yes");
+            /*window.showModalDialog(url, "辅助诊疗",
+                "dialogWidth=" + (screenWidth * 0.9) + "px;dialogHeight=" + (screenHeight * 0.8) + "px;center=yes");*/
+            window.open(url, "辅助诊疗", "width=" + (screenWidth * 0.9) + ",height=" + (screenHeight * 0.8));
         }
         
         #endregion

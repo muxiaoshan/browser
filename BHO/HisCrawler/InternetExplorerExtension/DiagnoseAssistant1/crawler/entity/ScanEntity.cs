@@ -14,7 +14,7 @@ namespace DiagnoseAssistant1.crawler.entity
         public string EpisodeID { get; set; }//就诊编码
         public string TStudyNoz {get; set;}//检查号
         public string TItemNamez {get; set;}//医嘱名称
-        public string TItemDatez { get; set; }//医嘱日期
+        public string TItemDatez { get; set; }//医嘱日期，数据库开单时间
         public string TItemStatusz {get; set;}//是否发布
         public string TOEOrderDrz {get; set;}//OEOrderDr
         public string TIsIllz { get; set; }//是否阳性
@@ -25,5 +25,6 @@ namespace DiagnoseAssistant1.crawler.entity
         public string Memoz { get; set; }//备注
         public string YXBXHJCSJ { get; set; }//影像表现或检查所见
         public string JCZDHTS { get; set; }//检查诊断或提示
+        public string JCSJ { get; set; }//检查时间
     }
 }

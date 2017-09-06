@@ -3,7 +3,7 @@ using System.Text;
 using mshtml;
 namespace DiagnoseAssistant1.crawler
 {
-    class DefaultCrawler : Crawler
+    class DefaultCrawler : HTMLCrawler
     {
         Log log = new Log("DefaultCrawler.txt");
 
