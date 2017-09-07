@@ -21,7 +21,7 @@ namespace DiagnoseAssistant1
     {
         IWebBrowser2 browser;
         private object site;
-
+        //private WebBrowser_V1 axDocumentV1;
         Log log = new Log();
 
         //存放就诊编码
@@ -31,9 +31,39 @@ namespace DiagnoseAssistant1
         /// </summary>
         static string username = null;
         const string fzzlUrlPrefix = "http://172.26.111.12/newAiadt/a/home/login";
-        
+        /*
+        /// <summary>
+        /// IE 版本
+        /// </summary>
+        int ieVersion;
+        public DiagnoseAssistant1()
+        {
+            string ieVersionStr;
+            try
+            {
+                //win7及以上用 svcVersion
+                ieVersionStr = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Internet Explorer", false).GetValue("svcVersion").ToString();
+            }
+            catch (Exception e)
+            {
+                try
+                {
+                    //其他用 Version
+                    ieVersionStr = Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Internet Explorer", false).GetValue("Version").ToString();
+                }
+                catch (Exception ex)
+                {
+                    //默认6.0
+                    ieVersionStr = "6.0";
+                }
+            }
+            ieVersionStr = ieVersionStr.Substring(0, 2);
+            ieVersion = Int32.Parse(ieVersionStr);
+            log.WriteLog("IE version:" + ieVersion);
+        }
+         * */
         #region OnDocumentComplete
-        //页面加载，包括iframe内页面加载后调用
+        //页面加载完成，包括iframe内页面加载后调用
         void OnDocumentComplete(object pDisp, ref object URL)
         {
             log.WriteLog("DiagnoseAssistant1 OnDocumentComplete. URL:" + URL);
@@ -48,12 +78,11 @@ namespace DiagnoseAssistant1
                         Episode episode = EpisodeRegexUtils.getEpisodeFromUrl(urlStr);
                         log.WriteLog("访问门诊电子病历页面，暂存患者编码[" + episode.PatientID + "]与就诊编码[" + episode.EpisodeID + "]");
                         _episode = episode;
-                        
-                    }
+                    }                    
                     //访问门诊患者列表页面
                     else if (urlStr.Contains("websys.csp?a=a&TMENU=50136"))
-                    {                        
-                        if (_episode != null)
+                    {
+                        if (_episode != null) //ie 11以下患者列表页面加载完后打开辅助诊疗；ie 11及以上则在患者列表页面跳转前就打开
                         {
                             log.WriteLog("访问门诊患者列表页面。已查看并暂存的门诊患者电子病历数，episode=" + _episode.ToString() + "，非null则访问辅助诊疗页面。");
                             accessFzzl();
@@ -84,7 +113,6 @@ namespace DiagnoseAssistant1
                             }
                         }
                     }
-                    
                 }
                 // @Eric Stob: Thanks for this hint!
                 // This will prevent this method being executed more than once.
@@ -97,6 +125,66 @@ namespace DiagnoseAssistant1
                 MessageBox.Show(ex.Message);
             }
         }
+        #endregion
+        #region 跳转前事件
+        /*
+        /// <summary>
+        /// XP IE6下页面跳转前绑定事件
+        /// </summary>
+        /// <param name="URL"></param>
+        /// <param name="Flags"></param>
+        /// <param name="TargetFrameName"></param>
+        /// <param name="PostData"></param>
+        /// <param name="Headers"></param>
+        /// <param name="Cancel"></param>
+        private void OnBeforeNavigate(string URL, int Flags, string TargetFrameName, ref object PostData, string Headers, ref bool Cancel)
+        {
+            //string strpostData = System.Text.Encoding.ASCII.GetString(PostData as byte[]);//关键，将上传的POST截取
+            log.WriteLog("OnBeforeNavigate 将跳转到：" + URL);
+            if (URL != null)
+            {
+                string urlStr = URL.ToString();
+                //访问门诊患者列表页面
+                if (urlStr.Contains("websys.csp?a=a&TMENU=50136"))
+                {
+                    if (_episode != null)
+                    {
+                        log.WriteLog("访问门诊患者列表页面。已查看并暂存的门诊患者电子病历数，episode=" + _episode.ToString() + "，非null则访问辅助诊疗页面。");
+                        accessFzzl();
+                    }
+                }
+            }
+        }
+         
+        /// <summary>
+        /// Win 7 IE11下页面跳转前事件
+        /// </summary>
+        /// <param name="URL"></param>
+        /// <param name="Flags"></param>
+        /// <param name="TargetFrameName"></param>
+        /// <param name="PostData"></param>
+        /// <param name="Headers"></param>
+        /// <param name="Cancel"></param>
+        private void OnBeforeNavigate2(object pDisp, ref object URL, ref object Flags, ref object TargetFrameName, ref object PostData,
+                                    ref object Headers, ref bool Cancel)
+        {
+            //string strpostData = System.Text.Encoding.ASCII.GetString(PostData as byte[]);//关键，将上传的POST截取
+            log.WriteLog("OnBeforeNavigate2 将跳转到：" + URL);
+            if (URL != null)
+            {
+                string urlStr = URL.ToString();
+                //访问门诊患者列表页面
+                if (urlStr.Contains("websys.csp?a=a&TMENU=50136"))
+                {
+                    if (_episode != null)
+                    {
+                        log.WriteLog("访问门诊患者列表页面。已查看并暂存的门诊患者电子病历数，episode=" + _episode.ToString() + "，非null则访问辅助诊疗页面。");
+                        accessFzzl();
+                    }
+                }
+            }
+        }
+        */
         #endregion
         //固定GUID
         [Guid("6D5140C1-7436-11CE-8034-00AA006009FA")]
@@ -111,7 +199,7 @@ namespace DiagnoseAssistant1
             //log.WriteLog("DiagnoseAssistant1 SetSite:" + site);
             this.site = site;
             try
-            {
+            {                
                 if (site != null)
                 {
                     var serviceProv = (IServiceProvider)this.site;
@@ -124,17 +212,31 @@ namespace DiagnoseAssistant1
 
                     ((DWebBrowserEvents2_Event)browser).DocumentComplete +=
                         new DWebBrowserEvents2_DocumentCompleteEventHandler(this.OnDocumentComplete);
-                    
-                    //keyboardHook.Install();
-                    //MessageBox.Show("hooking");                                        
+                    /*if (ieVersion >= 11)
+                    {
+                        ((DWebBrowserEvents2_Event)browser).BeforeNavigate2 +=
+                            new DWebBrowserEvents2_BeforeNavigate2EventHandler(this.OnBeforeNavigate2);
+                    }
+                    else
+                    {
+                        axDocumentV1 = (WebBrowser_V1)browser;				// work-around
+                        axDocumentV1.BeforeNavigate += new DWebBrowserEvents_BeforeNavigateEventHandler(this.OnBeforeNavigate);		// work-around
+                    }*/
                 }
                 else
                 {
                     ((DWebBrowserEvents2_Event)browser).DocumentComplete -=
                         new DWebBrowserEvents2_DocumentCompleteEventHandler(this.OnDocumentComplete);
+                    /*if (ieVersion >= 11)
+                    {
+                        ((DWebBrowserEvents2_Event)browser).BeforeNavigate2 -=
+                            new DWebBrowserEvents2_BeforeNavigate2EventHandler(this.OnBeforeNavigate2);
+                    }
+                    else
+                    {
+                        axDocumentV1.BeforeNavigate -= new DWebBrowserEvents_BeforeNavigateEventHandler(this.OnBeforeNavigate);
+                    }*/
                     browser = null;
-                    //keyboardHook.UnInstall();
-                    //MessageBox.Show("UnHookMe");
                 }
             }
             catch (Exception ex)
@@ -164,11 +266,9 @@ namespace DiagnoseAssistant1
         int IOleCommandTarget.Exec(IntPtr pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
         {
             try
-            {
-                
+            {                
                 if (_episode == null)
                 {
-                    //MessageBox.Show("没有查看过电子病历");
                     //打开辅助诊疗登录页面
                     showFzzlModalDialog(fzzlUrlPrefix + "?hzbm=&jzbm=&username=" + username);
                     return 0;
@@ -183,7 +283,6 @@ namespace DiagnoseAssistant1
             {
                 MessageBox.Show(ex.Message);
             }
-
             return 0;
         }
         void crawl(string url)
@@ -196,14 +295,14 @@ namespace DiagnoseAssistant1
             }
         }
         
-        // Summary:
-        //     访问辅助诊疗页面。
-        //
+        /// <summary>
+        /// 访问辅助诊疗页面。
+        /// </summary>
         void accessFzzl()
         {
             //取最近一个打开的病历
             Episode episode = _episode;
-            string fzzlUrl = "openChrome:" + fzzlUrlPrefix + "?param=hzbm_" + episode.PatientID + "_jzbm_" + episode.EpisodeID + "_username_" + username;
+            string fzzlUrl = fzzlUrlPrefix + "?hzbm=" + episode.PatientID + "&jzbm=" + episode.EpisodeID + "&username=" + username;
             showFzzlModalDialog(fzzlUrl);
             //移除最后一个元素
             _episode = null;
