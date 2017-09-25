@@ -11,7 +11,7 @@ namespace DiagnoseAssistant1
     {
         public static void Main()
         {
-            test5();
+            test7();
         }
         static void test1()
         {
@@ -125,6 +125,28 @@ namespace DiagnoseAssistant1
             {
                 Console.WriteLine("匹配失败。");
             }
+        }
+        static void test6()
+        {
+            Regex rxPEID = new Regex(@"/(\w+?)\.pdf$", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            Match m = rxPEID.Match("http://172.26.102.4/ClinicRptView/2017-08-29/0000792159_%e5%91%a8%e6%99%ae%e7%94%9f/E20170831-012/E20170831-012.pdf");
+            if (m.Success)
+            {
+                Console.WriteLine("匹配成功:" + m.Groups[1].ToString());
+            }
+            else
+            {
+                Console.WriteLine("匹配失败。");
+            }
+        }
+        static void test7()
+        {
+            string str = "http://172.26.102.4/ClinicRptView/2017-08-29/0000792159_%e5%91%a8%e6%99%ae%e7%94%9f/E20170831-012/E20170831-012.pdf";
+            int dotIdx = str.LastIndexOf(".");
+            int slashIdx = str.LastIndexOf("/");
+            Console.WriteLine("dotIdx=" + dotIdx + ",slashIdx=" + slashIdx);
+            string filename = str.Substring(slashIdx + 1, (dotIdx - slashIdx - 1));
+            Console.WriteLine("filename=" + filename);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace DiagnoseAssistant1.crawler
             {
                 PdfCrawler crawler = new PdfCrawler();
                 int dotIdx = url.LastIndexOf(".");
-                int slashIdx = url.LastIndexOf("/");               
+                int slashIdx = url.LastIndexOf("/");            
                 string fileName = url.Substring(slashIdx + 1, (dotIdx - slashIdx - 1));
                 crawler.fileName = fileName;
                 crawler.url = url;
